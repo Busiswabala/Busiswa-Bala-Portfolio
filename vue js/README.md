@@ -1,8 +1,4 @@
-# My Portfolio
-
-The Vue 3 portfolio app is in [`vue js/`](vue%20js/README.md). Follow its README to install dependencies, run the development server, or build the production site.
-
-The original HTML portfolio pages and shared screenshots remain at the repository root.# Busiswa Bala Portfolio
+# Busiswa Bala Portfolio
 
 A responsive portfolio built with Vue 3 and Vite. The single-page experience is composed from reusable Vue components and includes profile, about, skills, project, and contact sections.
 
