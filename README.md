@@ -1,33 +1,27 @@
-# My Portfolio
+# Busiswa Bala Portfolio
 
-The Vue 3 portfolio app is in [`vue js/`](vue%20js/README.md). Follow its README to install dependencies, run the development server, or build the production site.
-
-The original HTML portfolio pages and shared screenshots remain at the repository root.# Busiswa Bala Portfolio
-
-A responsive portfolio built with Vue 3 and Vite. The single-page experience is composed from reusable Vue components and includes profile, about, skills, project, and contact sections.
+The portfolio is a Vue 3 app in [`vue js/`](vue%20js/README.md). The live site is published at [busiswabala.github.io/Busiswa-Bala-Portfolio](https://busiswabala.github.io/Busiswa-Bala-Portfolio/).
 
 ## Run locally
 
 Requirements: Node.js 20.19+ or 22.12+.
 
 ```sh
+cd "vue js"
 npm install
 npm run dev
 ```
 
-Vite prints the local URL when the development server starts.
+## Deploy
 
-## Production build
+GitHub Actions builds the Vue app and publishes its `dist/` folder when changes are pushed to `main`. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. After that, pushes to `main` trigger deployment automatically.
+
+## Build manually
 
 ```sh
+cd "vue js"
 npm run build
 npm run preview
 ```
 
-The optimized site is generated in `dist/`. Project screenshots are imported from `images/` and included in the build.
-
-## Portfolio content
-
-Project descriptions, technologies, screenshots, and available repository/demo links are maintained in `src/data/projects.js`. Only projects with a known, project-specific public repository or demo display an external link.
-
-The contact form uses the existing Formspree endpoint. Form delivery depends on that endpoint remaining active.
+Project descriptions, technologies, screenshots, and available repository links are maintained in `vue js/src/data/projects.js`. The contact form uses the existing Formspree endpoint.
