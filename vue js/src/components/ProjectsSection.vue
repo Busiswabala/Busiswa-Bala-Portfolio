@@ -15,42 +15,54 @@ const visibleProjects = computed(() =>
 </script>
 
 <template>
-  <section id="projects" class="projects-section section-anchor">
-    <div class="section-shell">
-      <header class="section-heading projects-heading">
-        <div>
-          <p class="eyebrow">Selected work · 2024—2026</p>
-          <h2>Made with intent.</h2>
-        </div>
-        <p class="section-intro">
-          Team builds and independent studies, each one a chance to learn
-          something new.
-        </p>
-      </header>
-      <div class="project-toolbar">
-        <p>
-          <strong>{{ visibleProjects.length }}</strong> projects
-        </p>
-        <div class="filter-control" aria-label="Filter projects">
-          <button
-            v-for="option in filters"
-            :key="option"
-            type="button"
-            :class="{ selected: filter === option }"
-            :aria-pressed="filter === option"
-            @click="filter = option"
-          >
-            {{ option }}
-          </button>
-        </div>
-      </div>
-      <div class="projects-grid">
-        <ProjectCard
-          v-for="project in visibleProjects"
-          :key="project.title"
-          :project="project"
-        />
-      </div>
+  <section id="projects" class="container section-anchor">
+    <section class="page-header">
+      <p class="subtitle">My Proof</p>
+      <h1>Selected Creations &amp; Studies</h1>
+    </section>
+    <div class="project-filters" aria-label="Filter projects">
+      <button
+        v-for="option in filters"
+        :key="option"
+        type="button"
+        :class="{ active: filter === option }"
+        :aria-pressed="filter === option"
+        @click="filter = option"
+      >
+        {{ option }}
+      </button>
+    </div>
+    <div class="projects-grid">
+      <ProjectCard
+        v-for="project in visibleProjects"
+        :key="project.title"
+        :project="project"
+      />
     </div>
   </section>
 </template>
+
+<style scoped>
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -24px 0 28px;
+}
+
+.project-filters button {
+  border: 1px solid var(--hairline);
+  padding: 8px 14px;
+  background: var(--card);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.project-filters button.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+</style>

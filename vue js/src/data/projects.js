@@ -43,14 +43,14 @@ export const projects = [
     github: "https://github.com/imaanabrahams/Tutor_Connect",
   },
   {
-    title: "CraftSphere Marketplace",
+    title: "ArtisanHub Marketplace",
     category: "Team project · Vue frontend",
     kind: "Team",
     description:
-      "A Vue 3 and Vite marketplace now branded ArtisanHub. I built the navigation and footer components, the global stylesheet, and helped wire the app shell and router with the team.",
+      "A Vue 3 and Vite marketplace now branded ArtisanHub. I built the home and about page and the register and login page , the global stylesheet, and helped wire the app shell and router with the team.",
     technologies: ["Vue 3", "Vite", "Vue Router", "CSS"],
     image: craftSphere,
-    imageAlt: "CraftSphere artisan marketplace homepage",
+    imageAlt: "ArtisanHub marketplace homepage",
     github:
       "https://github.com/Khaalid-hattas/Group6-E-COMMERCE/tree/Busiswa/dev",
   },
@@ -60,7 +60,7 @@ export const projects = [
     kind: "Independent",
     description:
       "A focused contact-form study using semantic structure, readable type, and a restrained warm palette to make a simple task feel clear and welcoming.",
-    technologies: ["Semantic HTML", "CSS Flexbox", "Typography"],
+    technologies: ["Semantic HTML", "CSS Flexbox","JavaScript"],
     image: contactPage,
     imageAlt: "Minimalist contact page form design",
   },

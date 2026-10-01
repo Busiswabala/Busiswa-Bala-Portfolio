@@ -6,22 +6,23 @@ defineProps({ project: { type: Object, required: true } });
   <article class="project-card">
     <div class="project-image-box">
       <img :src="project.image" :alt="project.imageAlt" loading="lazy" />
-      <span class="project-index">{{
-        String(project.number).padStart(2, "0")
-      }}</span>
     </div>
     <div class="project-content">
       <p class="project-category">{{ project.category }}</p>
-      <h3>{{ project.title }}</h3>
+      <h2>{{ project.title }}</h2>
       <p class="project-description">{{ project.description }}</p>
-      <ul
+      <div
         class="project-tech-tags"
+        role="list"
         :aria-label="`${project.title} technologies`"
       >
-        <li v-for="technology in project.technologies" :key="technology">
-          {{ technology }}
-        </li>
-      </ul>
+        <span
+          v-for="technology in project.technologies"
+          :key="technology"
+          role="listitem"
+          >#{{ technology.replaceAll(" ", "") }}</span
+        >
+      </div>
       <div v-if="project.github || project.demo" class="project-links">
         <a
           v-if="project.github"
@@ -29,7 +30,7 @@ defineProps({ project: { type: Object, required: true } });
           :href="project.github"
           target="_blank"
           rel="noopener noreferrer"
-          >GitHub repository <span aria-hidden="true">↗</span></a
+          >View Code</a
         >
         <a
           v-if="project.demo"
@@ -37,11 +38,11 @@ defineProps({ project: { type: Object, required: true } });
           :href="project.demo"
           target="_blank"
           rel="noopener noreferrer"
-          >Live demo <span aria-hidden="true">↗</span></a
+          >Live Demo</a
         >
       </div>
       <p v-else class="project-link-note">
-        Independent study · No public repository
+        Personal study · No public repository available
       </p>
     </div>
   </article>

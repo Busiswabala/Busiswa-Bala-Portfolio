@@ -1,85 +1,76 @@
 <template>
-  <section id="about" class="about-section section-anchor">
-    <div class="section-shell">
-      <header class="section-heading">
-        <div>
-          <p class="eyebrow">The person behind the pixels</p>
-          <h2>A path built by staying curious.</h2>
-        </div>
-        <p class="section-intro">
-          I’m early in my software development journey, learning by building,
-          collaborating, and paying attention to the details that make
-          technology feel human.
-        </p>
-      </header>
-      <div class="about-grid">
-        <div class="about-story">
-          <p class="dropcap-narrative">
-            My first hello world was in Embarcadero Delphi. That small beginning
-            turned into a daily habit of asking how things work, then making my
-            own version.
-          </p>
+  <section id="about" class="editorial-container section-anchor">
+    <header class="about-hero-frame">
+      <span class="editorial-badge">Get to know me</span>
+      <h2 class="classic-title">My Journey Into Tech</h2>
+      <p class="editorial-tagline">
+        Bridging human experience with analytical design.
+      </p>
+    </header>
+    <div class="editorial-grid">
+      <section class="archive-timeline">
+        <h2 class="column-header">The Timeline</h2>
+        <div class="classic-timeline-node">
+          <span class="node-meta">What Sparked Me</span>
+          <h3>My discovery of coding</h3>
           <p>
-            Team projects have given me room to contribute to a full HR system,
-            a tutoring platform, and a Vue marketplace. I value clear
-            communication, steady iteration, and code that the next person can
-            understand.
+            When I first wrote my first "hello world" in Embarcadero Delphi.
           </p>
-          <blockquote>
-            “Every website should be accessible, interactive, and organised.”
-          </blockquote>
         </div>
-        <div class="about-timeline">
-          <h3>Learning in motion</h3>
-          <div class="timeline-item">
-            <span>01</span>
-            <div>
-              <strong>Curiosity</strong>
-              <p>
-                First experiments with code and the joy of making a screen
-                respond.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span>02</span>
-            <div>
-              <strong>Foundation</strong>
-              <p>
-                Building fluency in semantic HTML, responsive CSS, JavaScript,
-                and Git.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span>03</span>
-            <div>
-              <strong>Collaboration</strong>
-              <p>
-                Contributing features in shared repositories and learning to
-                build as a team.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <span>04</span>
-            <div>
-              <strong>What’s next</strong>
-              <p>
-                Growing my skills in Vue, APIs, asynchronous JavaScript, and
-                backend development.
-              </p>
-            </div>
-          </div>
+        <div class="classic-timeline-node">
+          <span class="node-meta">The Foundation</span>
+          <h3>Self-directed learning</h3>
+          <p>I dedicated daily hours to learning and understanding code.</p>
         </div>
-      </div>
-      <div class="interest-strip">
-        <span class="eyebrow">Away from the editor</span>
-        <p>
-          Architectural photography <span>·</span> Reading
-          <span>·</span> Strategy games
+        <div class="classic-timeline-node">
+          <span class="node-meta">Growing</span>
+          <h3>Working inside teams</h3>
+          <p>
+            Contributing to team-built products — a full HR management system, a
+            Vue.js e-commerce app, and a tutoring platform — each one stretching
+            how I plan, communicate and write code other people rely on.
+          </p>
+        </div>
+        <div class="classic-timeline-node">
+          <span class="node-meta">Today</span>
+          <h3>Building and creating</h3>
+          <p>
+            Actively building and mastering more complex programming frameworks.
+          </p>
+        </div>
+      </section>
+      <section class="narrative-prose">
+        <h2 class="column-header">Who I Am</h2>
+        <p class="dropcap-narrative">
+          I am a driven, curious individual who has just stepped into the tech
+          ecosystem with a deep passion for clean execution.
         </p>
-      </div>
+        <p>
+          I've cultivated skills like adaptability, attention to detail,
+          creativity, and continuous learning along the way. Moving into tech
+          lets me connect my soft skills with my technical ones — every project
+          is a chance to practise both.
+        </p>
+        <p class="signature-quote">
+          "I believe that code is an art form. Every website should be
+          accessible, interactive, and organised."
+        </p>
+        <div class="curiosity-capsule">
+          <div class="capsule-header">Currently Exploring</div>
+          <ul>
+            <li>Building REST APIs with Node.js, Express &amp; MySQL</li>
+            <li>Structuring reusable UI components in Vue.js</li>
+            <li>Deepening asynchronous JavaScript &amp; API integration</li>
+          </ul>
+        </div>
+        <div class="interest-item">
+          <h3>Outside of code</h3>
+          <p>
+            Architectural photography, analog reading, and strategic gaming keep
+            me curious and creative.
+          </p>
+        </div>
+      </section>
     </div>
   </section>
 </template>

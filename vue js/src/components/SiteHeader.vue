@@ -3,7 +3,8 @@ import { ref } from "vue";
 
 const menuOpen = ref(false);
 const links = [
-  { label: "About", href: "#about" },
+  { label: "Home", href: "#home" },
+  { label: "About Me", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
@@ -13,9 +14,10 @@ const links = [
 <template>
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
-      <a class="logo" href="#home" @click="menuOpen = false"
-        >Busiswa Bala<span class="logo-mark">.</span></a
-      >
+      <a class="logo" href="#home" @click="menuOpen = false">
+        Busiswa Bala<span class="dot">.</span>
+        <span class="role">Developer</span>
+      </a>
       <button
         class="nav-toggle"
         type="button"
@@ -36,7 +38,6 @@ const links = [
         <li v-for="link in links" :key="link.href">
           <a :href="link.href" @click="menuOpen = false">{{ link.label }}</a>
         </li>
-        <li class="nav-availability">Open to opportunities</li>
       </ul>
     </nav>
   </header>

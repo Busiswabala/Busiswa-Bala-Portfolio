@@ -21,3 +21,9 @@ const year = new Date().getFullYear();
   </main>
   <SiteFooter :year="year" />
 </template>
+
+<style>
+.section-anchor {
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+</style>
