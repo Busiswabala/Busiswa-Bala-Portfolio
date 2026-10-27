@@ -1,18 +1,23 @@
 <script setup>
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const menuOpen = ref(false);
+const scrolled = ref(false);
+const onScroll = () => (scrolled.value = window.scrollY > 8);
+onMounted(() => window.addEventListener("scroll", onScroll, { passive: true }));
+onBeforeUnmount(() => window.removeEventListener("scroll", onScroll));
 const links = [
   { label: "Home", href: "#home" },
   { label: "About Me", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Beyond", href: "#beyond" },
   { label: "Contact", href: "#contact" },
 ];
 </script>
 
 <template>
-  <header class="site-header">
+  <header class="site-header" :class="{ 'is-scrolled': scrolled }">
     <nav class="navbar" aria-label="Main navigation">
       <a class="logo" href="#home" @click="menuOpen = false">
         Busiswa Bala<span class="dot">.</span>

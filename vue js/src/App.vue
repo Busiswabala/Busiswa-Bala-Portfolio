@@ -1,22 +1,26 @@
 <script setup>
+import CinematicIntro from "./components/CinematicIntro.vue";
 import SiteHeader from "./components/SiteHeader.vue";
 import SiteFooter from "./components/SiteFooter.vue";
 import HomeSection from "./components/HomeSection.vue";
 import AboutSection from "./components/AboutSection.vue";
 import SkillsSection from "./components/SkillsSection.vue";
 import ProjectsSection from "./components/ProjectsSection.vue";
+import BeyondSection from "./components/BeyondSection.vue";
 import ContactSection from "./components/ContactSection.vue";
 
 const year = new Date().getFullYear();
 </script>
 
 <template>
+  <CinematicIntro />
   <SiteHeader />
   <main>
     <HomeSection />
     <AboutSection />
     <SkillsSection />
     <ProjectsSection />
+    <BeyondSection />
     <ContactSection />
   </main>
   <SiteFooter :year="year" />

@@ -1,7 +1,7 @@
 <template>
   <section id="about" class="editorial-container section-anchor">
-    <header class="about-hero-frame">
-      <span class="editorial-badge">Get to know me</span>
+    <header v-reveal class="about-hero-frame">
+      <span class="editorial-badge">01 — Get to know me</span>
       <h2 class="classic-title">My Journey Into Tech</h2>
       <p class="editorial-tagline">
         Bridging human experience with analytical design.
@@ -26,8 +26,8 @@
           <span class="node-meta">Growing</span>
           <h3>Working inside teams</h3>
           <p>
-            Contributing to team-built products — a full HR management system, a
-            Vue.js e-commerce app, and a tutoring platform — each one stretching
+            Contributing to team-built products,a full HR management system, a
+            Vue.js e-commerce app, and a tutoring platform,each one stretching
             how I plan, communicate and write code other people rely on.
           </p>
         </div>
@@ -66,8 +66,9 @@
         <div class="interest-item">
           <h3>Outside of code</h3>
           <p>
-            Architectural photography, analog reading, and strategic gaming keep
-            me curious and creative.
+            Cinematic micro films, analog reading, podcasts, conversations and
+            journaling keep me curious and creative. I also enjoy exploring the
+            outdoors, hiking, and capturing moments through photography.
           </p>
         </div>
       </section>

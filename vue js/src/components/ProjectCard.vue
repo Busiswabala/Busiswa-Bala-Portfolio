@@ -1,18 +1,39 @@
 <script setup>
-defineProps({ project: { type: Object, required: true } });
+defineProps({
+  project: { type: Object, required: true },
+  position: { type: Number, default: 1 },
+  total: { type: Number, default: 1 },
+});
+defineEmits(["open"]);
+
+const pad = (n) => String(n).padStart(2, "0");
 </script>
 
 <template>
-  <article class="project-card">
-    <div class="project-image-box">
+  <article class="reel-frame">
+    <button
+      type="button"
+      class="reel-screen"
+      :aria-label="`Open ${project.title} case study`"
+      @click="$emit('open', project)"
+    >
       <img :src="project.image" :alt="project.imageAlt" loading="lazy" />
-    </div>
-    <div class="project-content">
-      <p class="project-category">{{ project.category }}</p>
+      <span class="reel-count" aria-hidden="true">
+        Project {{ pad(position) }} / {{ pad(total) }}
+      </span>
+      <!-- Desktop hover bonus: the screenshot stays visible, details slide up -->
+      <span class="reel-overlay" aria-hidden="true">
+        <span class="reel-overlay-text">{{ project.description }}</span>
+        <span class="reel-overlay-cta">View case study →</span>
+      </span>
+    </button>
+
+    <div class="reel-meta">
+      <p class="reel-category">{{ project.category }}</p>
       <h2>{{ project.title }}</h2>
-      <p class="project-description">{{ project.description }}</p>
+      <p class="reel-desc">{{ project.description }}</p>
       <div
-        class="project-tech-tags"
+        class="reel-tags"
         role="list"
         :aria-label="`${project.title} technologies`"
       >
@@ -23,7 +44,10 @@ defineProps({ project: { type: Object, required: true } });
           >#{{ technology.replaceAll(" ", "") }}</span
         >
       </div>
-      <div v-if="project.github || project.demo" class="project-links">
+      <div class="reel-actions">
+        <button type="button" class="case-open" @click="$emit('open', project)">
+          Case study →
+        </button>
         <a
           v-if="project.github"
           class="project-link-btn primary-link"
@@ -41,7 +65,7 @@ defineProps({ project: { type: Object, required: true } });
           >Live Demo</a
         >
       </div>
-      <p v-else class="project-link-note">
+      <p v-if="!project.github && !project.demo" class="reel-note">
         Personal study · No public repository available
       </p>
     </div>

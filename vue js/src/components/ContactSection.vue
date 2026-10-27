@@ -1,8 +1,8 @@
 <template>
   <section id="contact" class="container section-anchor">
-    <section class="page-header">
-      <p class="subtitle">Let's Connect</p>
-      <h1>Beyond The Code &amp; Architecture</h1>
+    <section v-reveal class="page-header">
+      <p class="subtitle">05 — Let's Connect</p>
+      <h1>Let's Build Something Together</h1>
     </section>
     <div class="contact-grid">
       <section class="contact-interests">

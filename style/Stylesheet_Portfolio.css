@@ -1480,3 +1480,1545 @@ h3 {
     padding: 28px;
   }
 }
+
+/* ==========================================================================
+   Cinematic layer — intro, showreel, case-study gallery, film roll
+   Dark "scene" tokens sit beside the warm editorial palette.
+   ========================================================================== */
+
+:root {
+  --scene: #0f0e0c;
+  --scene-soft: #1b1a17;
+  --scene-text: #f3efe4;
+}
+
+body.scroll-lock {
+  overflow: hidden;
+}
+
+/* Section chapter labels already use .subtitle / .editorial-badge */
+
+/* ---------- Cinematic intro ---------- */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: var(--scene);
+  color: var(--scene-text);
+  overflow: hidden;
+  transition:
+    opacity 0.8s var(--ease),
+    visibility 0.8s;
+}
+
+.intro.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Letterbox bars close in, like a film opening */
+.intro::before,
+.intro::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  background: #000;
+  z-index: 3;
+  animation: letterbox 1.6s var(--ease) 0.2s forwards;
+}
+.intro::before {
+  top: 0;
+}
+.intro::after {
+  bottom: 0;
+}
+
+@keyframes letterbox {
+  to {
+    height: 8vh;
+  }
+}
+
+.intro-leak {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      40% 35% at 20% 30%,
+      rgba(214, 160, 84, 0.38),
+      transparent 70%
+    ),
+    radial-gradient(
+      35% 30% at 80% 70%,
+      rgba(156, 127, 76, 0.3),
+      transparent 70%
+    );
+  filter: blur(40px);
+  animation: leak 9s ease-in-out infinite alternate;
+}
+
+@keyframes leak {
+  from {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: translate3d(5%, 3%, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+.intro-grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.8s steps(6) infinite;
+  pointer-events: none;
+}
+
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-3%, 2%);
+  }
+  40% {
+    transform: translate(2%, -3%);
+  }
+  60% {
+    transform: translate(-2%, -1%);
+  }
+  80% {
+    transform: translate(3%, 3%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.intro-stage {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.intro-kicker,
+.intro-role,
+.intro-line,
+.intro-enter {
+  opacity: 0;
+  animation: intro-fade 1s var(--ease) forwards;
+}
+
+.intro-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brass);
+  animation-delay: 1.2s;
+}
+
+.intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 1.1;
+  margin: 18px 0 8px;
+  opacity: 0;
+  letter-spacing: 0.4em;
+  animation: intro-title 2.2s var(--ease) 1.6s forwards;
+}
+
+@keyframes intro-title {
+  from {
+    opacity: 0;
+    letter-spacing: 0.4em;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.04em;
+    filter: blur(0);
+  }
+}
+
+.intro-role {
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(243, 239, 228, 0.7);
+  animation-delay: 3s;
+}
+
+.intro-line {
+  margin: 26px 0 36px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  color: rgba(243, 239, 228, 0.85);
+  animation-delay: 3.4s;
+}
+
+.intro-enter {
+  border: 1px solid var(--brass);
+  background: transparent;
+  color: var(--scene-text);
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  cursor: pointer;
+  animation-delay: 4s;
+  transition:
+    background-color var(--speed) var(--ease),
+    color var(--speed) var(--ease);
+}
+
+.intro-enter:hover,
+.intro-enter:focus-visible {
+  background: var(--brass);
+  color: var(--scene);
+}
+
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-skip {
+  position: absolute;
+  z-index: 4;
+  right: 24px;
+  bottom: calc(8vh + 16px);
+  background: none;
+  border: 0;
+  color: rgba(243, 239, 228, 0.7);
+  font: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.intro-skip:hover {
+  color: var(--scene-text);
+}
+
+/* ---------- Showreel band ---------- */
+
+.showreel {
+  position: relative;
+  min-height: clamp(320px, 46vw, 520px);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  background: var(--scene);
+  color: var(--scene-text);
+}
+
+.showreel-fallback {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(
+      45% 40% at 25% 35%,
+      rgba(214, 160, 84, 0.45),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 35% at 78% 65%,
+      rgba(156, 127, 76, 0.32),
+      transparent 70%
+    ),
+    linear-gradient(135deg, #1b1a17, #0f0e0c);
+  filter: blur(30px);
+  animation: leak 10s ease-in-out infinite alternate;
+}
+
+.showreel-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.showreel-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 14, 12, 0.85),
+    rgba(15, 14, 12, 0.25) 60%,
+    rgba(15, 14, 12, 0.5)
+  );
+}
+
+.showreel-copy {
+  position: relative;
+  max-width: var(--content-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px var(--gap-lg);
+}
+
+.showreel-scene {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 10px;
+}
+
+.showreel-copy h2 {
+  color: var(--scene-text);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  margin-bottom: 12px;
+}
+
+.showreel-copy p:last-child {
+  max-width: 46ch;
+  color: rgba(243, 239, 228, 0.82);
+}
+
+.showreel-toggle {
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  background: rgba(15, 14, 12, 0.55);
+  border: 1px solid rgba(243, 239, 228, 0.4);
+  color: var(--scene-text);
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+/* ---------- Project gallery + case study ---------- */
+
+.project-image-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  padding: 0;
+  cursor: zoom-in;
+  font: inherit;
+}
+
+.project-image-cue {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 8px 16px;
+  background: var(--scene);
+  color: var(--scene-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  transition: transform var(--speed) var(--ease);
+}
+
+.project-card:hover .project-image-cue,
+.project-image-button:focus-visible .project-image-cue {
+  transform: translateY(0);
+}
+
+.case-open {
+  margin-top: 14px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--brass-dark);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.gallery-move,
+.gallery-enter-active,
+.gallery-leave-active {
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease);
+}
+.gallery-enter-from,
+.gallery-leave-to {
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+}
+.gallery-leave-active {
+  position: absolute;
+}
+
+.case-dialog {
+  border: 0;
+  padding: 0;
+  margin: auto;
+  width: min(960px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  background: var(--card);
+  color: var(--ink);
+  overflow: auto;
+}
+
+.case-dialog::backdrop {
+  background: rgba(15, 14, 12, 0.78);
+  backdrop-filter: blur(3px);
+}
+
+.case-dialog[open] {
+  animation: case-in 0.4s var(--ease);
+}
+@keyframes case-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.case-panel {
+  position: relative;
+}
+.case-media {
+  background: var(--scene);
+}
+.case-media img {
+  width: 100%;
+  max-height: 52vh;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.case-body {
+  padding: var(--gap-md) clamp(20px, 4vw, 44px) var(--gap-lg);
+}
+.case-body h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  margin: 6px 0 14px;
+}
+.case-body h3 {
+  font-size: 1.1rem;
+  margin: 22px 0 6px;
+  color: var(--brass-dark);
+}
+.case-lede {
+  color: var(--ink-soft);
+}
+.case-body .project-tech-tags {
+  margin: 22px 0 0;
+}
+.case-body .project-links {
+  margin-top: 20px;
+}
+
+.case-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(243, 239, 228, 0.5);
+  background: rgba(15, 14, 12, 0.6);
+  color: var(--scene-text);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* ---------- Beyond the Code: film roll ---------- */
+
+.beyond {
+  background: var(--scene);
+  color: var(--scene-text);
+}
+
+.beyond .container {
+  padding-bottom: var(--gap-md);
+}
+.beyond .page-header {
+  border-bottom-color: rgba(243, 239, 228, 0.15);
+  margin-bottom: var(--gap-md);
+}
+.beyond .page-header h1 {
+  color: var(--scene-text);
+}
+.beyond .page-header .subtitle {
+  color: var(--brass);
+}
+.beyond-intro {
+  max-width: 54ch;
+  margin-top: 10px;
+  color: rgba(243, 239, 228, 0.75);
+}
+
+.film-controls {
+  display: flex;
+  gap: 10px;
+}
+.film-controls button {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid rgba(243, 239, 228, 0.35);
+  color: var(--scene-text);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.film-controls button:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+
+.filmstrip {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(
+    24px,
+    calc((100vw - var(--content-width)) / 2 + 24px)
+  );
+  padding: 34px max(24px, calc((100vw - var(--content-width)) / 2 + 24px)) 56px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brass) transparent;
+  /* sprocket holes above and below the strip */
+  background:
+    repeating-linear-gradient(
+        90deg,
+        rgba(243, 239, 228, 0.22) 0 14px,
+        transparent 14px 32px
+      )
+      top 10px left 0 / 100% 8px no-repeat,
+    repeating-linear-gradient(
+        90deg,
+        rgba(243, 239, 228, 0.22) 0 14px,
+        transparent 14px 32px
+      )
+      bottom 28px left 0 / 100% 8px no-repeat;
+}
+
+.film-frame {
+  flex: 0 0 min(72vw, 380px);
+  scroll-snap-align: start;
+}
+
+.film-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(243, 239, 228, 0.18);
+  background: var(--scene-soft);
+}
+
+.film-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.film-frame:hover .film-image img {
+  transform: scale(1.05);
+}
+
+.film-image.is-card {
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(156, 127, 76, 0.12) 0 2px,
+      transparent 2px 22px
+    ),
+    var(--scene-soft);
+}
+
+.film-number {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: rgba(156, 127, 76, 0.7);
+}
+
+.film-frame figcaption {
+  display: grid;
+  gap: 2px;
+  margin-top: 12px;
+  font-size: 0.85rem;
+}
+.film-frame figcaption strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+.film-frame figcaption span {
+  color: rgba(243, 239, 228, 0.6);
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 860px) {
+  .case-media img {
+    max-height: 36vh;
+  }
+  .intro::before,
+  .intro::after {
+    animation-duration: 1.2s;
+  }
+}
+
+/* ==========================================================================
+   Vintage film hero + "Film and code" band
+   (paste at the very end of Stylesheet_Portfolio.css)
+   ========================================================================== */
+
+.hero-stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--scene);
+  color: var(--scene-text);
+}
+
+.hero-stage .hero-container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-stage .hero-subtitle {
+  color: var(--brass);
+}
+.hero-stage .hero-content h1 {
+  color: var(--scene-text);
+}
+.hero-stage .hero-content h2 {
+  color: rgba(243, 239, 228, 0.72);
+}
+.hero-stage .hero-description {
+  color: rgba(243, 239, 228, 0.84);
+}
+
+.hero-film-note {
+  max-width: 500px;
+  margin: -14px 0 32px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--brass);
+}
+
+.hero-stage .btn-dark {
+  background-color: var(--brass);
+  border-color: var(--brass);
+  color: var(--scene);
+}
+.hero-stage .btn-dark:hover {
+  background-color: var(--scene-text);
+  border-color: var(--scene-text);
+}
+.hero-stage .btn-outline {
+  color: var(--scene-text);
+  border-color: rgba(243, 239, 228, 0.45);
+}
+.hero-stage .btn-outline:hover {
+  border-color: var(--scene-text);
+  background-color: rgba(243, 239, 228, 0.08);
+}
+
+.hero-stage .chip {
+  color: rgba(243, 239, 228, 0.85);
+  border-color: rgba(243, 239, 228, 0.25);
+  background-color: rgba(15, 14, 12, 0.35);
+}
+
+.hero-stage .portrait-frame {
+  border-color: rgba(243, 239, 228, 0.3);
+  background-color: var(--scene-soft);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.hero-stage .portrait-frame img {
+  filter: sepia(0.35) contrast(1.05) saturate(0.85);
+}
+.hero-stage .monogram-caption {
+  color: rgba(243, 239, 228, 0.6);
+}
+
+/* Film layers */
+.film-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.film-fallback {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(
+      45% 40% at 25% 35%,
+      rgba(214, 160, 84, 0.42),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 35% at 78% 65%,
+      rgba(156, 127, 76, 0.3),
+      transparent 70%
+    ),
+    linear-gradient(135deg, #1b1a17, #0f0e0c);
+  filter: blur(30px);
+  animation: leak 10s ease-in-out infinite alternate;
+}
+
+.film-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(15, 14, 12, 0.78),
+      rgba(15, 14, 12, 0.35) 65%,
+      rgba(15, 14, 12, 0.55)
+    ),
+    radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.55));
+}
+
+/* Vertical film scratches that flicker in and out */
+.film-scratches {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 18%,
+      rgba(243, 239, 228, 0.35) 18.1%,
+      transparent 18.25%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 63%,
+      rgba(243, 239, 228, 0.4) 63.1%,
+      transparent 63.2%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 87%,
+      rgba(243, 239, 228, 0.45) 87.1%,
+      transparent 87.22%
+    );
+  animation: scratches 1.6s steps(1) infinite;
+}
+
+@keyframes scratches {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  18% {
+    opacity: 0.2;
+    transform: translateX(-3vw);
+  }
+  36% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0.18;
+    transform: translateX(4vw);
+  }
+  72% {
+    opacity: 0;
+  }
+  88% {
+    opacity: 0.15;
+    transform: translateX(-1.5vw);
+  }
+}
+
+.film-grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.8s steps(6) infinite;
+  pointer-events: none;
+}
+
+/* Slim black bars, like the edges of a film gate */
+.film-gate {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-top: 14px solid #000;
+  border-bottom: 14px solid #000;
+}
+
+.film-toggle {
+  position: absolute;
+  right: 24px;
+  bottom: 32px;
+  z-index: 3;
+  background: rgba(15, 14, 12, 0.55);
+  border: 1px solid rgba(243, 239, 228, 0.4);
+  color: var(--scene-text);
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+/* Film and code band */
+.film-code {
+  background: var(--scene-soft);
+  color: var(--scene-text);
+  border-top: 1px solid rgba(243, 239, 228, 0.08);
+}
+
+.film-code-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--gap-xl) 24px;
+}
+
+.film-code-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 12px;
+}
+
+.film-code-head h2 {
+  color: var(--scene-text);
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  max-width: 18ch;
+}
+
+.film-code-list {
+  list-style: none;
+  margin: var(--gap-lg) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(243, 239, 228, 0.18);
+}
+
+.film-code-list li {
+  padding: 26px 28px 8px 0;
+}
+.film-code-list li + li {
+  padding-left: 28px;
+  border-left: 1px solid rgba(243, 239, 228, 0.12);
+}
+
+.film-code-num {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--brass);
+}
+
+.film-code-pair {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 8px 0 10px;
+}
+.film-code-pair em {
+  color: var(--brass);
+}
+
+.film-code-text {
+  color: rgba(243, 239, 228, 0.72);
+  max-width: 30ch;
+}
+
+.film-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .film-code-list {
+    grid-template-columns: 1fr;
+  }
+  .film-code-list li + li {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(243, 239, 228, 0.12);
+  }
+  .film-toggle {
+    bottom: 24px;
+    right: 16px;
+  }
+}
+
+/* ---------- Short film showcase ---------- */
+
+.film-showcase {
+  background: var(--scene);
+  color: var(--scene-text);
+}
+
+.film-showcase-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--gap-xl) 24px;
+}
+
+.film-showcase-head h2 {
+  color: var(--scene-text);
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.film-showcase-head > p:last-child {
+  max-width: 56ch;
+  color: rgba(243, 239, 228, 0.75);
+}
+
+.film-showcase-screen {
+  margin-top: var(--gap-lg);
+  border: 1px solid rgba(243, 239, 228, 0.18);
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.film-showcase-screen video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+/* ==========================================================================
+   Skills: cinematic icon frames
+   (paste at the very end of Stylesheet_Portfolio.css)
+   ========================================================================== */
+
+.skill-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+/* A small dark "film frame" holding the icon, with sprocket holes at the sides */
+.skill-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 72px;
+  color: var(--brass);
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+        180deg,
+        rgba(243, 239, 228, 0.3) 0 5px,
+        transparent 5px 11px
+      )
+      left 5px top 5px / 4px calc(100% - 10px) no-repeat,
+    repeating-linear-gradient(
+        180deg,
+        rgba(243, 239, 228, 0.3) 0 5px,
+        transparent 5px 11px
+      )
+      right 5px top 5px / 4px calc(100% - 10px) no-repeat,
+    var(--scene);
+  border: 1px solid rgba(156, 127, 76, 0.45);
+  transition:
+    box-shadow var(--speed) var(--ease),
+    color var(--speed) var(--ease);
+}
+
+/* Warm light leak that fades in on hover */
+.skill-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    70% 90% at 80% 20%,
+    rgba(214, 160, 84, 0.35),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+}
+
+.skill-card:hover .skill-frame {
+  color: #e2bd82;
+  box-shadow: 0 10px 28px rgba(156, 127, 76, 0.32);
+}
+.skill-card:hover .skill-frame::after {
+  opacity: 1;
+}
+
+.skill-icon {
+  width: 42px;
+  height: 42px;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-icon path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+/* Lines "draw" themselves when the group scrolls in, and again on hover */
+.skills-section.is-visible .skill-icon path {
+  animation: skill-draw 1.4s var(--ease) both;
+}
+.skill-card:hover .skill-icon path {
+  animation: skill-draw-hover 0.9s var(--ease) both;
+}
+
+@keyframes skill-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes skill-draw-hover {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.skill-scene {
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Learning pipeline: dashed frame, quieter icon, blinking "recording" dot */
+.skill-card.pipeline .skill-frame {
+  border-style: dashed;
+  color: rgba(156, 127, 76, 0.8);
+}
+
+.skill-rec {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #b5483a;
+  animation: skill-rec 1.6s ease-in-out infinite;
+}
+
+@keyframes skill-rec {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Keep every skill card the same width, even when a group has only 1-2 cards */
+.skills-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Video frames: show the whole clip with cinematic black bars, no sepia filter */
+.film-front .film-photo[src$=".mp4"],
+.film-front video.film-photo {
+  object-fit: contain;
+  background: #000;
+  filter: none;
+}
+
+/* ==========================================================================
+   FILM ROLL (complete, compact). Paste at the very end of
+   Stylesheet_Portfolio.css. Safe to paste even if you added earlier
+   film-roll styles: later rules simply win.
+   ========================================================================== */
+
+.filmstrip {
+  gap: 16px;
+  padding-top: 30px;
+  padding-bottom: 44px;
+}
+
+.film-frame {
+  flex: 0 0 min(72vw, 280px);
+}
+
+.film-card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.film-card:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+}
+
+.film-card-inner {
+  position: relative;
+  display: block;
+  aspect-ratio: 6 / 5;
+  transform-style: preserve-3d;
+  transition: transform 0.8s var(--ease);
+}
+
+.film-frame.is-flipped .film-card-inner {
+  transform: rotateY(180deg);
+}
+
+@media (hover: hover) {
+  .film-frame:hover .film-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.film-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid rgba(243, 239, 228, 0.18);
+}
+
+.film-front {
+  align-items: center;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(156, 127, 76, 0.1) 0 2px,
+      transparent 2px 22px
+    ),
+    var(--scene-soft);
+}
+
+.film-back {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  gap: 8px;
+  background:
+    radial-gradient(
+      80% 70% at 85% 15%,
+      rgba(214, 160, 84, 0.22),
+      transparent 70%
+    ),
+    var(--scene);
+  border-color: rgba(156, 127, 76, 0.55);
+}
+
+.film-art {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  color: var(--brass);
+}
+
+.film-art .skill-icon {
+  width: 64px;
+  height: 64px;
+  stroke-width: 1.4;
+}
+
+/* Photos fill the frame; video shows whole with cinematic black bars */
+.film-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.3) contrast(1.05);
+}
+
+video.film-photo {
+  object-fit: contain;
+  background: #000;
+  filter: none;
+}
+
+.film-counter {
+  position: relative;
+  align-self: flex-start;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.film-hint {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 239, 228, 0.55);
+}
+
+.film-front .film-counter {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  z-index: 1;
+}
+
+.film-front .film-hint {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  z-index: 1;
+}
+
+.film-takeaway {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  color: var(--scene-text);
+}
+
+.film-takeaway-text {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(243, 239, 228, 0.82);
+}
+
+.film-frame figcaption {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+.film-frame figcaption strong {
+  font-size: 1rem;
+}
+
+/* Closing "End of reel" frame */
+.film-card-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  aspect-ratio: 6 / 5;
+  padding: 14px 16px;
+  cursor: default;
+  border: 1px dashed rgba(156, 127, 76, 0.5);
+}
+
+.film-end .film-art {
+  opacity: 0.6;
+}
+
+.film-end .film-counter {
+  align-self: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-card-inner {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* ==========================================================================
+   Projects film roll: large frames, details always visible.
+   Paste at the very end of Stylesheet_Portfolio.css.
+   ========================================================================== */
+
+.projects-reel {
+  padding-bottom: var(--gap-xl);
+}
+
+/* The header block above the strip should not add its own big bottom gap */
+.projects-reel > .container {
+  padding-bottom: 0;
+}
+
+.reel-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.reel-controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition:
+    background-color var(--speed) var(--ease),
+    color var(--speed) var(--ease);
+}
+
+.reel-controls button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* The strip bleeds off the right edge like the Film Roll, with sprocket holes */
+.projects-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brass) transparent;
+  padding: 34px max(24px, calc((100vw - var(--content-width)) / 2 + 24px)) 40px;
+  scroll-padding-inline: max(
+    24px,
+    calc((100vw - var(--content-width)) / 2 + 24px)
+  );
+  background:
+    repeating-linear-gradient(
+        90deg,
+        rgba(27, 26, 23, 0.16) 0 14px,
+        transparent 14px 32px
+      )
+      top 10px left 0 / 100% 8px no-repeat,
+    repeating-linear-gradient(
+        90deg,
+        rgba(27, 26, 23, 0.16) 0 14px,
+        transparent 14px 32px
+      )
+      bottom 14px left 0 / 100% 8px no-repeat;
+}
+
+.strip-enter-active,
+.strip-leave-active {
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+.strip-enter-from,
+.strip-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.reel-frame {
+  flex: 0 0 min(86vw, 520px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  transition:
+    box-shadow var(--speed) var(--ease),
+    transform var(--speed) var(--ease);
+}
+
+.reel-frame:hover {
+  box-shadow: 0 18px 44px rgba(27, 26, 23, 0.14);
+  transform: translateY(-3px);
+}
+
+/* The "screen": always shows the screenshot */
+.reel-screen {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--scene);
+  overflow: hidden;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.reel-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.8s var(--ease);
+}
+
+.reel-screen:hover img {
+  transform: scale(1.03);
+}
+
+.reel-screen:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: -4px;
+}
+
+.reel-count {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 10px;
+  background: rgba(15, 14, 12, 0.78);
+  color: var(--scene-text);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Desktop hover bonus: panel slides up over the lower part of the screenshot */
+.reel-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 36px 20px 18px;
+  background: linear-gradient(
+    to top,
+    rgba(15, 14, 12, 0.94) 55%,
+    rgba(15, 14, 12, 0)
+  );
+  color: var(--scene-text);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease);
+}
+
+@media (hover: hover) {
+  .reel-overlay {
+    display: flex;
+  }
+  .reel-frame:hover .reel-overlay,
+  .reel-screen:focus-visible .reel-overlay {
+    transform: translateY(0);
+  }
+}
+
+.reel-overlay-text {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(243, 239, 228, 0.9);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reel-overlay-cta {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* Details that are always visible (so nothing depends on hovering) */
+.reel-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px 22px;
+}
+
+.reel-category {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+}
+
+.reel-meta h2 {
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.reel-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.reel-tags span {
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.reel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 6px;
+}
+
+.reel-actions .case-open {
+  margin-top: 0;
+}
+
+.reel-note {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 860px) {
+  .reel-frame {
+    flex-basis: 86vw;
+  }
+  .reel-meta {
+    padding: 16px 16px 18px;
+  }
+}
