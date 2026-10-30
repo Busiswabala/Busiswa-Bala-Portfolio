@@ -3,6 +3,8 @@ import portrait from "../../../images/BBProfilePicture.jpeg";
 import FilmBackdrop from "./FilmBackdrop.vue";
 import FilmCodeBand from "./FilmCodeBand.vue";
 import FilmShowcase from "./FilmShowcase.vue";
+
+const cvUrl = `${import.meta.env.BASE_URL}Busiswa-Bala-CV.pdf`;
 </script>
 
 <template>
@@ -16,7 +18,7 @@ import FilmShowcase from "./FilmShowcase.vue";
             <h1>
               Hello, I'm<br /><span class="name-display">Busiswa Bala</span>
             </h1>
-            <h2>Junior Software Developer</h2>
+            <h2>Full - Stack Web Developer</h2>
             <p class="hero-description">
               I am new to the tech space and driven by curiosity and passion. I
               love breaking down complex problems and turning ideas into clean,
@@ -29,6 +31,7 @@ import FilmShowcase from "./FilmShowcase.vue";
             <div class="hero-button">
               <a href="#about" class="btn btn-outline">Get to know me</a>
               <a href="#projects" class="btn btn-dark">My work</a>
+              <a :href="cvUrl" class="btn btn-outline" download>Download my CV</a>
             </div>
             <div class="chip-row">
               <span class="chip">HTML5</span>
