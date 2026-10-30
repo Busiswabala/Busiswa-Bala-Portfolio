@@ -1,8 +1,8 @@
 <script setup>
 import portrait from "../../../images/BBProfilePicture.jpeg";
-import FilmBackdrop from "./FilmBackdrop.vue";
-import FilmCodeBand from "./FilmCodeBand.vue";
-import FilmShowcase from "./FilmShowcase.vue";
+import FilmBackdrop from "./Filmbackdrop.vue";
+import FilmCodeBand from "./Filmcodeband.vue";
+import FilmShowcase from "./FilmShowCase.vue";
 
 const cvUrl = `${import.meta.env.BASE_URL}Busiswa-Bala-CV.pdf`;
 </script>
